@@ -1,14 +1,20 @@
 # coding: utf-8
 from selenium import webdriver
 import time
+import platform
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 
 chromeOptions = webdriver.ChromeOptions()
 mobile_emulation = {"deviceName" : "Apple iPhone 6"}
 chromeOptions.add_experimental_option("mobileEmulation",mobile_emulation)
+
+os = platform.system()
 #Chrome diriverのパス
-chromedriver = "./chrom/chromedriver.exe"
+if os == "Windows":
+	chromedriver = "./chrom/chromedriver.exe"
+else :
+	chromedriver = "./chrom_mac/chromedriver"
 
 driver = webdriver.Chrome(executable_path=chromedriver, chrome_options=chromeOptions)
 
