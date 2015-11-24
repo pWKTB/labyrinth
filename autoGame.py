@@ -2,6 +2,7 @@
 import ConfigParser
 import platform
 import time
+import urllib
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
@@ -103,6 +104,12 @@ class AutoGame(object):
 				time.sleep(1)
 				tag = self.driver.find_element_by_xpath(path)
 
+	def splitQuestUrl(self,url):
+		decode_url = urllib.unquote(url)
+		split_url = decode_url.split("/hkt48/quest/")
+		result_url = split_url[1].split("?")
+		return result_url[0]
+
 	#ログイン
 	def login(self):
 		self.driver.get(self.login_url);
@@ -124,10 +131,43 @@ class AutoGame(object):
 
 	def venture(self):
 		self.startAdventure()
-		self.click("a","class","btnType_new",1)
-		self.click("div","xpath","/html/body/div/div",1)
-		self.click("div","xpath","/html/body/div/div",1)
-		self.click("a","text",u"次へ",1)
+		while 1:
+			url = self.driver.current_url
+			current = self.splitQuestUrl(url)
+			print current
+
+			if current == "index":
+				btn = [tag for tag in self.driver.find_elements_by_tag_name('a')]
+				if u"ボス戦へ挑む" in btn[0].text:
+					self.click("a","class","btnType_red liquid",1)
+				else :
+					self.click("a","text",u"冒険",0)
+			elif current == "questResult":
+				btn = [tag for tag in self.driver.find_elements_by_tag_name('a')]
+				if u"ボス戦へ挑む" in btn[0].text:
+					self.click("a","class","btnType_red liquid",1)
+				else :
+					self.click("a","text",u"冒険",0)
+			elif current == "scenario/logic":
+				self.click("div","xpath","/html/body/div/div",1)
+			elif current == "itemDropResult":
+				self.click("a","text",u"次へ",1)
+			elif current == "bossIndex":
+				self.click("a","class","btnType_red liquid",1)
+
+			elif current == "bossSwf":
+				self.click("div","xpath","/html/body/div/div",1)
+
+			elif current == "bossWinResult":
+				self.click("a","class","btnType_gray_radius",1)
+			elif current == "actionEmpty":
+				for m in xrange(0,10):
+					for s in xrange(0,6):
+						print str(m) + ":" + str(s*10)
+						time.sleep(10)
+				self.startAdventure()
+			else :
+				self.click("div","xpath","/html/body/div/div",1)
 
 if __name__ == '__main__':
 	ag = AutoGame()
