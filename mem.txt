@@ -1,0 +1,35 @@
+次の冒険へ(class="btnType_red width140")
+%2FquestResult
+
+btnType_new
+%2Findex
+
+xpath
+%2Fquest%3FquestId%3D172%26unique%3D14483713385654648ac41b7
+
+次へ
+%2FitemDropResult
+
+xpath
+%2FlevelUp%3Funq%3D1448371797565466552c8bf
+
+xpath
+%2FitemDrop%3Funq%3D1448371922565466d2342c4
+
+btnType_red liquid
+
+campaignSwf
+login
+
+top
+enter
+
+mypage
+
+quest%2FbossWinResult
+
+scenario%2Flogic
+
+quest%2FquestClear
+
+http://sp.isky.am/acp/shh/?url=http://lb-hkt48-web-2006873409.ap-northeast-1.elb.amazonaws.com/hkt48/top/index
