@@ -23,16 +23,17 @@ class AutoGame(object):
 	def action(self):
 		self.login()
 		self.enter()
-		self.autoQuest()
+		#self.autoQuest()
+		self.autoEvent()
 
 	#設定ファイルからの読み込み
 	def initConfig(self):
 		inifile = ConfigParser.SafeConfigParser()
 		inifile.read("./config.ini")
-		self.mailaddress = inifile.get("account","mailaddress")
-		self.password = inifile.get("account","password")
-		self.deviceName = inifile.get("system","deviceName")
-		self.login_url = inifile.get("url","login")
+		self.mailaddress = "tnk-snow-mind1209@ezweb.ne.jp"
+		self.password = "keyof75321"
+		self.deviceName = "Apple iPhone 6"
+		self.login_url = "http://sp.isky.am/login.php"
 
 	#webDriverの初期設定
 	def initDriver(self):
@@ -94,9 +95,10 @@ class AutoGame(object):
 				time.sleep(1)
 				tag = self.driver.find_element_by_xpath(path)
 
-	def  clickCoordinate(self,offset_x,offset_y):
-		ActionChains(self.driver).ref.move_by_offset(offset_x,offset_y).click().perform()
-		ActionChains(self.driver).ref.move_by_offset(-(offset_x),-(offset_y))
+	def clickCoordinate(self,offset_x,offset_y):
+		time.sleep(5)
+		ActionChains(self.driver).move_by_offset(offset_x,offset_y).click().perform()
+		ActionChains(self.driver).move_by_offset(-(offset_x),-(offset_y)).perform()
 
 
 	def splitQuestUrl(self,url):
@@ -138,6 +140,7 @@ class AutoGame(object):
 			else :
 				self.click("div","xpath","/html/body/div/div",1)
 			if self.flg_break:
+				self.driver.close()
 				break
 
 	def top(self,path):
@@ -169,17 +172,71 @@ class AutoGame(object):
 		elif path == "bossIndex":
 			self.click("a","class","btnType_red liquid",1)
 		elif path == "bossSwf":
-			self.click(100,380)
-		elif path == "bossWinResult":
+			self.clickCoordinate(100,380)
+		elif path == "bossWinResult":#バグかも
 			self.click("a","class","btnType_gray_radius",1)
 		elif path == "actionEmpty":
-			for m in xrange(0,10):
-				for s in xrange(0,6):
-					print str(m) + ":" + str(s*10)
-					time.sleep(10)
-			self.startQuest()
+			self.flg_break = 1
 		else :
 			self.click("div","xpath","/html/body/div/div",1)
+
+	def autoEvent(self):
+		while 1:
+			url = self.driver.current_url
+			current = self.splitQuestUrl(url)
+			print current[0] + current[1]
+			if current[0] == "top":
+				self.top(current[1])
+			elif current[0] == "mypage":
+				self.mypageEvent(current[1])
+			elif current[0] == "event036Raid":
+				self.event036Raid(current[1])
+			else :
+				self.click("div","xpath","/html/body/div/div",1)
+			if self.flg_break:
+				self.driver.close()
+				break
+
+	def mypageEvent(self,path):
+		if path == "index":
+			self.click("a","class","none btnType_flash",1)
+		else :
+			self.click("div","xpath","/html/body/div/div",1)
+
+	def event036Raid(self,path):
+		if path == "index" or path == "questResult":
+			self.click("img","src","latest_quest.png",0)
+		elif path == "questInfo" or path == "itemDropResult" or path == "bossWinResult":
+			self.click("a","text",u"探索する",1)
+		elif path == "itemDropResult":
+			self.click("div","xpath","/html/body/div/div",1)
+		elif path == "bossIndex":
+			tag = self.driver.find_element_by_xpath("/html/body/div/div[2]/div[6]/div/table/tbody/tr[2]/td/div[2]")
+			#/html/body/div/div[2]/div[6]/div/table/tbody/tr[2]/td/div[3]/div
+			status = self.driver.find_element_by_xpath("/html/body/div/div[2]/div[3]")
+			status_split = status.text.split(" ")
+			hp =status_split[1]
+			#btn = [tag for tag in self.driver.find_elements_by_tag_name('div')  if tag.get_attribute("style") == "color:#FF0000;"]
+			print tag.text[4:5] + " : " + hp
+			if tag.text == u"BPが足りない！":
+				self.flg_break = 1
+			else :
+				#if self.bossFlg(tag.text[4:5],hp):
+				self.click("input","type","submit",1)
+				#else :
+				#	self.click("a","text",u"エリアに戻る",1)
+		elif path == "actionEmpty":
+			self.flg_break = 1
+		elif path == "loginBonusResult":
+			self.click("a","text",u"イベントTOPへ",1)
+		else :
+			self.click("div","xpath","/html/body/div/div",1)
+
+	def bossFlg(self,bp,hp):
+		if hp < (bp * 57729):
+			return 1
+		else :
+			return 0
 
 if __name__ == '__main__':
 	ag = AutoGame()
