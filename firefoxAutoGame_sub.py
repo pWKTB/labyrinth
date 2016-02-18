@@ -32,7 +32,9 @@ class AutoGame(object):
 	def initConfig(self):
 		inifile = ConfigParser.SafeConfigParser()
 		inifile.read("./config.ini")
-		self.mailaddress = "tayukinatu88-7135@ezweb.ne.jp"
+		#self.mailaddress = "tayukinatu88-7135@ezweb.ne.jp"
+		self.mailaddress = "metayas17@ezweb.ne.jp"
+		#metayas17@ezweb.ne.jp
 		self.password = "keyof75321"
 		self.deviceName = "Apple iPhone 6"
 		self.login_url = "http://sp.isky.am/login.php"
@@ -138,7 +140,12 @@ class AutoGame(object):
 			elif current[0] == "mypage":
 				self.mypage(current[1])
 			elif current[0] == "quest":
-				self.quest(current[1])
+				try:
+					current[2]
+					self.quest(current[1],current[2])
+				except IndexError:
+					self.quest(current[1],"")
+				#self.quest(current[1])
 			else :
 				self.click("div","xpath","/html/body/div/div",1)
 			if self.flg_break:
@@ -162,7 +169,7 @@ class AutoGame(object):
 		else :
 			self.click("div","xpath","/html/body/div/div",1)
 
-	def quest(self,path):
+	def quest(self,path,path2):
 		if path == "index" or path == "questResult":
 			btn = [tag for tag in self.driver.find_elements_by_tag_name('a')]
 			if u"ボス戦へ挑む" in btn[0].text:
@@ -171,6 +178,14 @@ class AutoGame(object):
 				self.click("a","text",u"冒険",0)
 		elif path == "itemDropResult" or path == "bossWinResult":
 			self.click("a","text",u"次へ",1)
+		elif path == "itemDrop":
+			print path2
+			if path2 == "unq":
+				self.click("div","xpath","/html/body/div/div",1)
+			else :
+				#self.clickCoordinate(100,380)
+				#self.click("div","xpath","/html/body/div/div",1)
+				self.click("a","text","SKIP",1)
 		elif path == "questClear":
 			#self.clickCoordinate(100,150)
 			self.click("a","text","SKIP",1)

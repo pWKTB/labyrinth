@@ -20,6 +20,7 @@ class AutoGame(object):
 
 	def __init__(self):
 		self.initConfig()
+		self.initAcount()
 		self.initDriver()
 
 	def action(self):
@@ -32,11 +33,14 @@ class AutoGame(object):
 	def initConfig(self):
 		inifile = ConfigParser.SafeConfigParser()
 		inifile.read("./config.ini")
-		self.mailaddress = "tnk-snow-mind1209@ezweb.ne.jp"
-		self.password = "keyof75321"
 		self.deviceName = "Apple iPhone 6"
 		self.login_url = "http://sp.isky.am/login.php"
 		#tayukinatu88-7135@ezweb.ne.jp
+
+	#アカウントの設定
+	def initAcount(self):
+		self.mailaddress = "tnk-snow-mind1209@ezweb.ne.jp"
+		self.password = "keyof75321"
 
 	#webDriverの初期設定
 	def initDriver(self):
@@ -172,7 +176,7 @@ class AutoGame(object):
 				self.click("a","text",u"冒険",0)
 		elif path == "itemDropResult" or path == "bossWinResult":
 			self.click("a","text",u"次へ",1)
-		elif path == "questClear":
+		elif path == "questClear" or path == "itemDrop":
 			self.click("a","text","SKIP",1)
 		elif path == "bossIndex":
 			self.click("a","class","btnType_red liquid",1)
@@ -248,7 +252,7 @@ class AutoGame(object):
 					self.click("a","text",u"エリアに戻る",1)
 		elif path == "quintetResult":
 			self.click("a","text",u"探索",1)
-		elif path == "questClear":
+		elif path == "questClear" or path == "itemDrop":
 			self.click("a","text","SKIP",1)
 		elif path == "bossSwf":
 			self.clickCoordinate(100,380)
@@ -311,6 +315,6 @@ class AutoGame(object):
 			if quest_flg:
 				self.click("img","src","http://lb-hkt48-web-2006873409.ap-northeast-1.elb.amazonaws.com/hkt48/images/sp/event/039Raid/area/7.png",1)
 
-if __name__ == '__main__':
-	ag = AutoGame()
-	ag.action()
+#if __name__ == '__main__':
+#	ag = AutoGame()
+	#ag.action()
