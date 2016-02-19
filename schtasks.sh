@@ -4,8 +4,9 @@ schtasks /Create /tn "autoGame_sub" /tr "C:\Windows\system32\cmd.exe /c 'python 
 
 
 
-schtasks /Create /tn "autoGame" /tr "C:\Windows\system32\cmd.exe /c 'python C:\User_Program\labyrinth\firefoxAutoGame_event042Raid.py'" /sc MINUTE /mo 50 /ST 20:40
-schtasks /Create /tn "autoGame_sub" /tr "C:\Windows\system32\cmd.exe /c 'python C:\User_Program\labyrinth\firefoxAutoGame_event042Raid_sub.py'" /sc MINUTE /mo 50 /ST 21:30
+schtasks /Create /tn "autoGame" /tr "C:\Windows\system32\cmd.exe /c 'python C:\User_Program\labyrinth\firefoxAutoGame_event042Raid.py'" /sc MINUTE /mo 50 /ST 02:40
+schtasks /Create /tn "autoGame_sub" /tr "C:\Windows\system32\cmd.exe /c 'python C:\User_Program\labyrinth\firefoxAutoGame_event042Raid_sub.py'" /sc MINUTE /mo 50 /ST 02:55
+schtasks /Create /tn "autoGame_sub3" /tr "C:\Windows\system32\cmd.exe /c 'python C:\User_Program\labyrinth\firefoxAutoGame_event042Raid_sub3.py'" /sc MINUTE /mo 50 /ST 03:10
 
 
 
