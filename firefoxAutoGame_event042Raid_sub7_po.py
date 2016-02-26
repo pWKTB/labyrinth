@@ -12,9 +12,8 @@ class AutoGameEvent042Raid(AutoGame):
 
 	#アカウントの設定
 	def initAcount(self):
-		self.mailaddress = "tnk-snow-mind1209@ezweb.ne.jp"
-		#self.mailaddress = "tayukinatu88-7135@ezweb.ne.jp"
-		self.password = "keyof75321"
+		self.mailaddress = "fushityo-garyo-tensei@ezweb.ne.jp"
+		self.password = "85888588j"
 
 	def autoEvent(self):
 		while 1:
@@ -107,7 +106,7 @@ class AutoGameEvent042Raid(AutoGame):
 		print "HP = " + hp + "  BP = " + bp + "  MAX AP = " + str((int(bp)+4)*161545)
 		#if int(hp) < ((int(bp)+3)*100000):
 		#if tag == u"空飛ぶ雪像":
-		if tag == u"厄介田栄作" or tag == u"だるまんC":
+		if tag == u"厄介田栄作" or tag == u"空飛ぶ雪像" or tag == u"だるまんC":
 			return 1
 		else :
 			return 0
@@ -118,7 +117,7 @@ class AutoGameEvent042Raid(AutoGame):
 		quest_flg = 1
 		print src
 		if src != "http://lb-hkt48-web-2006873409.ap-northeast-1.elb.amazonaws.com/hkt48/images/sp/event/042Raid/base/appear.png":
-			self.click("img","src","http://lb-hkt48-web-2006873409.ap-northeast-1.elb.amazonaws.com/hkt48/images/sp/event/042Raid/area/7.png",1)
+			self.click("img","src","http://lb-hkt48-web-2006873409.ap-northeast-1.elb.amazonaws.com/hkt48/images/sp/event/042Raid/area/8.png",1)
 		else :
 			self.click("img","src","http://lb-hkt48-web-2006873409.ap-northeast-1.elb.amazonaws.com/hkt48/images/sp/event/042Raid/base/appear.png",1)
 			divs = [tag for tag in self.driver.find_elements_by_tag_name('div')  if tag.get_attribute("class") == "eventBtnPopUp"]
@@ -137,7 +136,7 @@ class AutoGameEvent042Raid(AutoGame):
 					quest_flg = 0
 					break
 			if quest_flg:
-				self.click("img","src","http://lb-hkt48-web-2006873409.ap-northeast-1.elb.amazonaws.com/hkt48/images/sp/event/042Raid/area/7.png",1)
+				self.click("img","src","http://lb-hkt48-web-2006873409.ap-northeast-1.elb.amazonaws.com/hkt48/images/sp/event/042Raid/area/8.png",1)
 
 
 if __name__ == '__main__':

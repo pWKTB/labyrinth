@@ -12,9 +12,8 @@ class AutoGameEvent042Raid(AutoGame):
 
 	#アカウントの設定
 	def initAcount(self):
-		self.mailaddress = "tnk-snow-mind1209@ezweb.ne.jp"
-		#self.mailaddress = "tayukinatu88-7135@ezweb.ne.jp"
-		self.password = "keyof75321"
+		self.mailaddress = "se7nt0ak1a-s7kr1s.b9bc@docomo.ne.jp"
+		self.password = "pese6732"
 
 	def autoEvent(self):
 		while 1:
@@ -48,12 +47,10 @@ class AutoGameEvent042Raid(AutoGame):
 		elif path == "itemDropResult":
 			self.click("div","xpath","/html/body/div/div",1)
 		elif path == "bossIndex" or path == "bossIndex#undefined":
-			status = self.driver.find_element_by_xpath("/html/body/div/div[2]/div[1]/div[2]")
+			#status = self.driver.find_element_by_xpath("/html/body/div/div[2]/div[1]/div[2]")
 			#level = re.search(u"【Lv.(.*?)】", status.text).group(1)
-			#status = self.driver.find_element_by_xpath("/html/body/div/div[2]/div[3]")
-			#level = re.search(u"HP: (.*?) /", status.text).group(1)
-			print status.text
-			level = status.text[-5:]
+			status = self.driver.find_element_by_xpath("/html/body/div/div[2]/div[3]")
+			level = re.search(u"HP: (.*?) /", status.text).group(1)
 			print level
 
 			#/html/body/div/div[2]/div[4]/div[2]/img
@@ -93,21 +90,20 @@ class AutoGameEvent042Raid(AutoGame):
 			self.click("div","xpath","/html/body/div/div",1)
 
 	def bossFlg(self,tag,tag_sub):
-		#d = datetime.datetime.today()
-		#date = '%s ' % d
-		#data = tag + " " + date + "\n"
-		#print data
-		#f = open('C:\User_Program\labyrinth\level.txt', 'a+') # 書き込みモードで開く
-		#f.write(data) # 引数の文字列をファイルに書き込む
-		#f.close() # ファイルを閉じる
+		d = datetime.datetime.today()
+		date = '%s ' % d
+		data = tag + " " + date + "\n"
+		print data
+		f = open('C:\User_Program\labyrinth\level.txt', 'a+') # 書き込みモードで開く
+		f.write(data) # 引数の文字列をファイルに書き込む
+		f.close() # ファイルを閉じる
 
 		hp = tag
 		bp = re.search(u"bp_(.*?).png", tag_sub).group(1)
 
 		print "HP = " + hp + "  BP = " + bp + "  MAX AP = " + str((int(bp)+4)*161545)
-		#if int(hp) < ((int(bp)+3)*100000):
-		#if tag == u"空飛ぶ雪像":
-		if tag == u"厄介田栄作" or tag == u"だるまんC":
+		if int(hp) < ((int(bp)+3)*100000):
+		#if 1:
 			return 1
 		else :
 			return 0
@@ -118,7 +114,7 @@ class AutoGameEvent042Raid(AutoGame):
 		quest_flg = 1
 		print src
 		if src != "http://lb-hkt48-web-2006873409.ap-northeast-1.elb.amazonaws.com/hkt48/images/sp/event/042Raid/base/appear.png":
-			self.click("img","src","http://lb-hkt48-web-2006873409.ap-northeast-1.elb.amazonaws.com/hkt48/images/sp/event/042Raid/area/7.png",1)
+			self.click("img","src","http://lb-hkt48-web-2006873409.ap-northeast-1.elb.amazonaws.com/hkt48/images/sp/event/042Raid/area/1.png",1)
 		else :
 			self.click("img","src","http://lb-hkt48-web-2006873409.ap-northeast-1.elb.amazonaws.com/hkt48/images/sp/event/042Raid/base/appear.png",1)
 			divs = [tag for tag in self.driver.find_elements_by_tag_name('div')  if tag.get_attribute("class") == "eventBtnPopUp"]
@@ -137,7 +133,7 @@ class AutoGameEvent042Raid(AutoGame):
 					quest_flg = 0
 					break
 			if quest_flg:
-				self.click("img","src","http://lb-hkt48-web-2006873409.ap-northeast-1.elb.amazonaws.com/hkt48/images/sp/event/042Raid/area/7.png",1)
+				self.click("img","src","http://lb-hkt48-web-2006873409.ap-northeast-1.elb.amazonaws.com/hkt48/images/sp/event/042Raid/area/1.png",1)
 
 
 if __name__ == '__main__':

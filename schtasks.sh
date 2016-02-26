@@ -4,9 +4,13 @@ schtasks /Create /tn "autoGame_sub" /tr "C:\Windows\system32\cmd.exe /c 'python 
 
 
 
-schtasks /Create /tn "autoGame" /tr "C:\Windows\system32\cmd.exe /c 'python C:\User_Program\labyrinth\firefoxAutoGame_event042Raid.py'" /sc MINUTE /mo 50 /ST 02:40
-schtasks /Create /tn "autoGame_sub" /tr "C:\Windows\system32\cmd.exe /c 'python C:\User_Program\labyrinth\firefoxAutoGame_event042Raid_sub.py'" /sc MINUTE /mo 50 /ST 02:55
-schtasks /Create /tn "autoGame_sub3" /tr "C:\Windows\system32\cmd.exe /c 'python C:\User_Program\labyrinth\firefoxAutoGame_event042Raid_sub3.py'" /sc MINUTE /mo 50 /ST 03:10
+schtasks /Create /tn "autoGame" /tr "C:\Windows\system32\cmd.exe /c 'python C:\User_Program\labyrinth\firefoxAutoGame_event042Raid.py'" /sc MINUTE /mo 50 /ST 21:30
+schtasks /Create /tn "autoGame_sub" /tr "C:\Windows\system32\cmd.exe /c 'python C:\User_Program\labyrinth\firefoxAutoGame_event042Raid_sub.py'" /sc MINUTE /mo 50 /ST 21:37
+schtasks /Create /tn "autoGame_sub3" /tr "C:\Windows\system32\cmd.exe /c 'python C:\User_Program\labyrinth\firefoxAutoGame_event042Raid_sub3.py'" /sc MINUTE /mo 50 /ST 21:44
+schtasks /Create /tn "autoGame_sub4" /tr "C:\Windows\system32\cmd.exe /c 'python C:\User_Program\labyrinth\firefoxAutoGame_event042Raid_sub4.py'" /sc MINUTE /mo 50 /ST 21:51
+schtasks /Create /tn "autoGame_sub5" /tr "C:\Windows\system32\cmd.exe /c 'python C:\User_Program\labyrinth\firefoxAutoGame_event042Raid_sub5.py'" /sc MINUTE /mo 50 /ST 21:58
+schtasks /Create /tn "autoGame_sub6" /tr "C:\Windows\system32\cmd.exe /c 'python C:\User_Program\labyrinth\firefoxAutoGame_event042Raid_sub6_po.py'" /sc MINUTE /mo 50 /ST 22:05
+schtasks /Create /tn "autoGame_sub7" /tr "C:\Windows\system32\cmd.exe /c 'python C:\User_Program\labyrinth\firefoxAutoGame_event042Raid_sub7_po.py'" /sc MINUTE /mo 50 /ST 22:12
 
 
 
